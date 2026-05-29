@@ -105,6 +105,7 @@ function App() {
         <MetricRibbon />
         <Platform />
         <Workflow />
+        <DataSculpture />
         <CommandCenter />
         <CTA />
         <Footer />
@@ -322,13 +323,6 @@ function HeroThreeScene() {
     scene.add(particles);
 
     let frameId;
-    const pointer = { x: 0, y: 0 };
-    const onPointer = (event) => {
-      const rect = mount.getBoundingClientRect();
-      pointer.x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-      pointer.y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-    };
-    mount.addEventListener('pointermove', onPointer);
 
     const resize = () => {
       const { width, height } = mount.getBoundingClientRect();
@@ -342,8 +336,8 @@ function HeroThreeScene() {
     const clock = new THREE.Clock();
     const animate = () => {
       const t = clock.getElapsedTime();
-      root.rotation.y = Math.sin(t * 0.33) * 0.16 + pointer.x * 0.12;
-      root.rotation.x = Math.sin(t * 0.27) * 0.08 - pointer.y * 0.08;
+      root.rotation.y = Math.sin(t * 0.33) * 0.16;
+      root.rotation.x = Math.sin(t * 0.27) * 0.08;
       root.position.y = Math.sin(t * 0.9) * 0.08;
       ring.rotation.z += 0.006;
       innerRing.rotation.z -= 0.004;
@@ -368,7 +362,6 @@ function HeroThreeScene() {
 
     return () => {
       cancelAnimationFrame(frameId);
-      mount.removeEventListener('pointermove', onPointer);
       window.removeEventListener('resize', resize);
       renderer.dispose();
       mount.removeChild(renderer.domElement);
@@ -448,6 +441,27 @@ function Workflow() {
             <h3>{title}</h3>
             <p>{text}</p>
           </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function DataSculpture() {
+  return (
+    <section className="data-sculpture-section section-pad">
+      <div className="data-sculpture-copy">
+        <div className="section-kicker"><span /> Data sculpture</div>
+        <h2>A second 3D system view for your business data.</h2>
+        <p>Every quote, material change, and margin report becomes part of one living inventory intelligence layer — visual, clean, and easy to trust.</p>
+      </div>
+      <div className="data-sculpture-visual" aria-hidden="true">
+        <div className="data-core"><img src={logoFromVideo} alt="" /></div>
+        <span className="data-orbit orbit-x" />
+        <span className="data-orbit orbit-y" />
+        <span className="data-orbit orbit-z" />
+        {['Quote', 'PLA', 'Margin', 'Stock', 'Cost', 'Report'].map((label, index) => (
+          <b key={label} className={`data-node node-${index}`}>{label}</b>
         ))}
       </div>
     </section>

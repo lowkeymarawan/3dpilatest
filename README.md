@@ -1,14 +1,11 @@
 # 3D-Pi
 
-Vite + React landing page for 3D-Pi.
+Vite + React animated landing page.
 
-## Local run
-```bash
-npm install
-npm run dev
-```
+## Vercel settings
+- Framework Preset: Vite
+- Build Command: npm run build
+- Output Directory: dist
+- Root Directory: /
 
-## Build
-```bash
-npm run build
-```
+`vercel.json` is included, so Vercel should pick these automatically.
